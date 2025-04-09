@@ -21,6 +21,8 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
         return;
     }
     console.log('Файл loveAsync.txt записан');
+
+
     // читаем файл после записи
     fs.readFile('loveAsync.txt', 'utf8', (err, data) => {
         if (err) {
@@ -29,6 +31,16 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
         }
         console.log(`Файл loveAsync.txt записан: \n ${data}`);
     });
+
+
+    // Реализовал удаление файла в асинхронном варианте(после чтения)
+    fs.unlink('loveAsync.txt', (err) => {
+        if (err) {
+            console.error('Ошибка удаления файла', err);
+            return;
+        }
+        console.log('Файл loveAsync.txt удален');
+    });    
 });
 
 // реализовал запись текстового файла в синхронном варианте
