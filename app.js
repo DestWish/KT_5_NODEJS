@@ -14,6 +14,22 @@ fs.readFile('helloAsync.txt', 'utf8', (err, data) => {
 let fileContent = fs.readFileSync('hellosync.txt', 'utf8')
 console.log(fileContent);
 
+// реализовал запись текстового файла в асинхронном варианте
+fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
+    if (err) {
+        console.error('Ошибка записи файла', err);
+        return;
+    }
+    console.log('Файл loveAsync.txt записан');
+    // читаем файл после записи
+    fs.readFile('loveAsync.txt', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Ошибка чтения файла', err);
+            return;
+        }
+        console.log(`Файл loveAsync.txt записан: \n ${data}`);
+    });
+});
 
 // реализовал запись текстового файла в синхронном варианте
 fs.writeFileSync('loveSync.txt', 'I LOVE ITHUB <3 Sync');
