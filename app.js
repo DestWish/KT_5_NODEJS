@@ -13,3 +13,9 @@ fs.readFile('helloAsync.txt', 'utf8', (err, data) => {
 //реализовал чтение файла в синхронном варианте
 let fileContent = fs.readFileSync('hellosync.txt', 'utf8')
 console.log(fileContent);
+
+
+// реализовал запись текстового файла в синхронном варианте
+fs.writeFileSync('loveSync.txt', 'I LOVE ITHUB <3 Sync');
+fileContent = fs.readFileSync('loveSync.txt', 'utf8')
+console.log(`Файл loveSync.txt записан: \n ${fileContent}`); 
