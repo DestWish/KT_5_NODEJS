@@ -47,7 +47,14 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
                 console.log(`Файл loveAsync.txt прочитан после дозаписи 4: ${data}`);
 
 
-
+                // Реализовал удаление текстового файла в асинхронном варианте(после чтения)
+                fs.unlink('loveAsync.txt', (err) => {
+                    if (err) {
+                        console.error('Ошибка удаления файла 5', err);
+                        return;
+                    }
+                    console.log('Файл loveAsync.txt удален 5');
+                });
             });
         });
     });
