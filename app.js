@@ -32,6 +32,24 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
         console.log(`Файл loveAsync.txt записан: \n ${data}`);
     });
 
+    // реализовал дозапись текстового файла в асинхронном варианте
+    fs.appendFile('loveAsync.txt', ' I LOVE NODE.JS <3 Async', (err) => {
+        if (err) {
+            console.error('Ошибка записи файла', err);
+            return;
+        }
+        console.log('Файл loveAsync.txt "дозаписан"');
+    });
+
+    // читаем файл после дозаписи
+    fs.readFile('loveAsync.txt', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Ошибка чтения файла', err);
+            return;
+        }
+        console.log(`Файл loveAsync.txt записан: \n ${data}`);
+    }
+
 
     // Реализовал удаление текстового файла в асинхронном варианте(после чтения)
     fs.unlink('loveAsync.txt', (err) => {
