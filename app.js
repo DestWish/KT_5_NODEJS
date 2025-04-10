@@ -29,7 +29,7 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
             console.error('Ошибка чтения файла', err);
             return;
         }
-        console.log(`Файл loveAsync.txt записан: \n ${data}`);
+        console.log(`Файл loveAsync.txt записан: ${data}`);
     });
 
     // реализовал дозапись текстового файла в асинхронном варианте
@@ -47,8 +47,8 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
             console.error('Ошибка чтения файла', err);
             return;
         }
-        console.log(`Файл loveAsync.txt записан: \n ${data}`);
-    }
+        console.log(`Файл loveAsync.txt записан: ${data}`);
+    })
 
 
     // Реализовал удаление текстового файла в асинхронном варианте(после чтения)
@@ -64,7 +64,11 @@ fs.writeFile('loveAsync.txt', 'I LOVE ITHUB <3 Async', (err) => {
 // реализовал запись текстового файла в синхронном варианте
 fs.writeFileSync('loveSync.txt', 'I LOVE ITHUB <3 Sync');
 fileContent = fs.readFileSync('loveSync.txt', 'utf8')
-console.log(`Файл loveSync.txt записан: \n ${fileContent}`); 
+console.log(`Файл loveSync.txt записан: ${fileContent}`); 
+// реализовал дозапись текстового файла в синхронном варианте
+fs.appendFileSync('loveSync.txt', ' I LOVE NODE.JS <3 Sync');
+fileContent = fs.readFileSync('loveSync.txt', 'utf8')
+console.log(`Файл loveSync.txt "дозаписан": ${fileContent}`);
 // Реализовал удаление текстового файла в синхронном варианте(после чтения)
 fs.unlinkSync('loveSync.txt');
 console.log('Файл loveSync.txt удален');
