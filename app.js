@@ -1,4 +1,7 @@
 const fs = require('fs');
+const Emitter = require('events');
+
+let emitter = new Emitter();
 
 // реализовал чтение файла в асинхронном варианте(Для наглядности сделал его с другим именем
 // и раньше(чтобы вызывался первым, а обрабатывался вторым))
@@ -53,6 +56,9 @@ fs.readFile('helloAsync.txt', 'utf8', (err, data) => {
                             return;
                         }
                         console.log('Файл loveAsync.txt удален 5');
+
+                        // Сгенерировал вызов обработчика события event1
+                        emitter.emit('event1');
                     });
                 });
             });
@@ -77,4 +83,11 @@ fileContent = fs.readFileSync('loveSync.txt', 'utf8')
 console.log(`Синхронно "дозаписан" файл loveSync.txt: ${fileContent}`);
 // Реализовал удаление текстового файла в синхронном варианте(после чтения)
 fs.unlinkSync('loveSync.txt');
+// Сгенерировал обработчики события event1
 console.log('Синхронно удален файл loveSync.txt');
+emitter.on('event1', () => {
+    console.log('Событие 1');
+});
+emitter.on('event1', () => {
+    console.log('Событие 1 еще один обработчик');
+});
