@@ -58,7 +58,8 @@ fs.readFile('helloAsync.txt', 'utf8', (err, data) => {
                         console.log('Файл loveAsync.txt удален 5');
 
                         // Сгенерировал вызов обработчика события event1
-                        emitter.emit('event1');
+                        // добавил к вызову обработчика - параметр
+                        emitter.emit('event1', 'Событие 1 но с переданным параметром');
                     });
                 });
             });
@@ -88,6 +89,7 @@ console.log('Синхронно удален файл loveSync.txt');
 emitter.on('event1', () => {
     console.log('Событие 1');
 });
-emitter.on('event1', () => {
-    console.log('Событие 1 еще один обработчик');
+//передал параметр в обработчик события event1
+emitter.on('event1', (data) => {
+    console.log(`Событие 1 ${data}`);
 });
