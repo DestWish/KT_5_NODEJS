@@ -149,18 +149,20 @@ writebleStream.on('finish', () => {
     let readableStream = fs.createReadStream('stream.txt', 'utf8');
     readableStream.on('data', (chunk) => {
         console.log(`Чтение файла по частям: ${chunk}`);
+
+
+        // Используя канал pipe скопировал данные из одного текстового файла в другой
+        let readableSream = fs.createReadStream('stream.txt', 'utf8');
+        let writeableStream = fs.createWriteStream('streamCopy.txt');
+        readableSream.pipe(writeableStream);
+        writeableStream.on('finish', () => {
+            console.log('Копирование файла завершено');
+
+            let readableStream = fs.createReadStream('streamCopy.txt', 'utf8');
+            readableStream.on('data', (chunk) => {
+                console.log(`Копирование файла по частям: ${chunk}`);
+            });
+        });
     });
 });
 
-// Используя канал pipe скопировал данные из одного текстового файла в другой
-let readableSream = fs.createReadStream('stream.txt', 'utf8');
-let writeableStream = fs.createWriteStream('streamCopy.txt');
-readableSream.pipe(writeableStream);
-writeableStream.on('finish', () => {
-    console.log('Копирование файла завершено');
-
-    let readableStream = fs.createReadStream('streamCopy.txt', 'utf8');
-    readableStream.on('data', (chunk) => {
-        console.log(`Копирование файла по частям: ${chunk}`);
-    });
-});
