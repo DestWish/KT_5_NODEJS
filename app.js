@@ -150,4 +150,7 @@ writebleStream.on('finish', () => {
     readableStream.on('data', (chunk) => {
         console.log(`Чтение файла по частям: ${chunk}`);
     });
+    readableStream.end(() => {
+        console.log('Чтение файла завершено');
+    });
 });
