@@ -4,7 +4,7 @@ const util = require('util');
 
 let emitter = new Emitter();
 
-function User(){
+function User() {
 };
 util.inherits(User, Emitter);
 
@@ -18,11 +18,29 @@ user.on('userEvent', (data) => {
     console.log(`Событие userEvent ${data}`);
 });
 
-User.prototype.emitUserEvent = function(data){
+User.prototype.emitUserEvent = function (data) {
     this.emit('userEvent', data);
 }
 
 user.emitUserEvent('(параметр события)');
+
+
+// Не прибегая к функции util.inherits
+class User2 extends Emitter {
+    emitUser2Event(data) {
+        this.emit('user2Event', data);
+    };
+};
+let user2 = new User2();
+
+user2.on('user2Event', () => {
+    console.log('Событие user2Event');
+});
+
+user2.on('user2Event', (data) => {
+    console.log(`Событие user2Event ${data}`);
+});
+user2.emitUser2Event('(параметр события2)')
 
 
 // реализовал чтение файла в асинхронном варианте(Для наглядности сделал его с другим именем
