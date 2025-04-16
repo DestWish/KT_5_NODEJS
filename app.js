@@ -1,7 +1,29 @@
 const fs = require('fs');
 const Emitter = require('events');
+const util = require('util');
 
 let emitter = new Emitter();
+
+function User(){
+};
+util.inherits(User, Emitter);
+
+let user = new User();
+
+user.on('userEvent', () => {
+    console.log('Событие userEvent');
+});
+
+user.on('userEvent', (data) => {
+    console.log(`Событие userEvent ${data}`);
+});
+
+User.prototype.emitUserEvent = function(data){
+    this.emit('userEvent', data);
+}
+
+user.emitUserEvent('(параметр события)');
+
 
 // реализовал чтение файла в асинхронном варианте(Для наглядности сделал его с другим именем
 // и раньше(чтобы вызывался первым, а обрабатывался вторым))
