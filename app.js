@@ -124,12 +124,30 @@ fileContent = fs.readFileSync('loveSync.txt', 'utf8')
 console.log(`Синхронно "дозаписан" файл loveSync.txt: ${fileContent}`);
 // Реализовал удаление текстового файла в синхронном варианте(после чтения)
 fs.unlinkSync('loveSync.txt');
+
+
 // Сгенерировал обработчики события event1
 console.log('Синхронно удален файл loveSync.txt');
 emitter.on('event1', () => {
     console.log('Событие 1');
 });
+
+
 //передал параметр в обработчик события event1
 emitter.on('event1', (data) => {
     console.log(`Событие 1 ${data}`);
+});
+
+
+//при помощи потоков чтения и записи реализовал запись и последующее чтение файла
+let writebleStream = fs.createWriteStream('stream.txt')
+writebleStream.write('I am writing by stream now\n')
+writebleStream.write('I am writing by stream now 2\n')
+writebleStream.end('end of writing by stream\n')
+
+writebleStream.on('finish', () => {
+    let readableStream = fs.createReadStream('stream.txt', 'utf8');
+    readableStream.on('data', (chunk) => {
+        console.log(`Чтение файла по частям: ${chunk}`);
+    });
 });
