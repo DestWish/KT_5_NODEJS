@@ -166,3 +166,14 @@ writebleStream.on('finish', () => {
     });
 });
 
+
+//Создал файл архив используя модуль zlib
+const zlib = require('zlib');
+const gzip = zlib.createGzip();
+const input = fs.createReadStream('stream.txt');
+const output = fs.createWriteStream('stream.txt.gz');
+input.pipe(gzip).pipe(output);
+output.on('finish', () => {
+    console.log('Файл сжат в архив stream.txt.gz');
+});
+
